@@ -6,9 +6,7 @@ import (
 	"github.com/go-sql-driver/mysql"
 )
 
-var Db *sql.DB
-
-func init() {
+func GetDbConn() *sql.DB {
 	config := mysql.Config{
 		User:                 "root",
 		Passwd:               "1qaz2wsx3edc",
@@ -19,6 +17,5 @@ func init() {
 	}
 
 	db, _ := sql.Open("mysql", config.FormatDSN())
-
-	Db = db
+	return db
 }
