@@ -20,9 +20,10 @@ func init() {
 	}
 
 	db, _ := sql.Open("mysql", config.FormatDSN())
+
 	db.SetMaxOpenConns(5)
 	db.SetMaxIdleConns(2)
-	db.SetConnMaxLifetime(5 * time.Minute)
+	db.SetConnMaxLifetime(time.Hour)
 
 	Db = db
 }
