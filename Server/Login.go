@@ -12,7 +12,7 @@ type Users struct {
 
 func (u *Users) CreateUser() {
 
-	conn := DataAcess.GetDbConn()
+	conn := DataAcess.Db
 
 	stmt, err := conn.Prepare("Insert Users set account=? ,password = ? ,email = ?")
 	checkErr(err)
@@ -20,7 +20,6 @@ func (u *Users) CreateUser() {
 	stmt.Exec(u.Account, u.Password, u.Email)
 	checkErr(err)
 
-	conn.Close()
 }
 
 func checkErr(err error) {

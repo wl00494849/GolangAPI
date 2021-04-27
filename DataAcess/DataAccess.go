@@ -2,11 +2,14 @@ package DataAcess
 
 import (
 	"database/sql"
+	"time"
 
 	"github.com/go-sql-driver/mysql"
 )
 
-func GetDbConn() *sql.DB {
+var Db *sql.DB
+
+func init() {
 	config := mysql.Config{
 		User:                 "root",
 		Passwd:               "1qaz2wsx3edc",
@@ -17,5 +20,9 @@ func GetDbConn() *sql.DB {
 	}
 
 	db, _ := sql.Open("mysql", config.FormatDSN())
-	return db
+	db.SetMaxOpenConns(5)
+	db.SetMaxIdleConns(2)
+	db.SetConnMaxLifetime(5 * time.Minute)
+
+	Db = db
 }
