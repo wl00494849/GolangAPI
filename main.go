@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GolangAPI/Controller"
+	"GolangApi/Controller"
 	"net/http"
 )
 
