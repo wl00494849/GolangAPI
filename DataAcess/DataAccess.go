@@ -21,8 +21,11 @@ func init() {
 
 	db, _ := sql.Open("mysql", config.FormatDSN())
 
+	//最大開幾個連線
 	db.SetMaxOpenConns(5)
+	//最多幾個閒置連線
 	db.SetMaxIdleConns(2)
+	//閒置多久後刪除連線
 	db.SetConnMaxLifetime(time.Hour)
 
 	Db = db
