@@ -1,9 +1,7 @@
 package Server
 
 import (
-	"database/sql"
-
-	"github.com/go-sql-driver/mysql"
+	"GolangApi/DataAcess"
 )
 
 type Users struct {
@@ -14,24 +12,13 @@ type Users struct {
 
 func (u *Users) CreateUser() {
 
-	config := mysql.Config{
-		User:                 "root",
-		Passwd:               "1qaz2wsx3edc",
-		Addr:                 "127.0.0.1:3306",
-		Net:                  "tcp",
-		DBName:               "projectmanage",
-		AllowNativePasswords: true,
-	}
-
-	db, _ := sql.Open("mysql", config.FormatDSN())
-
-	stmt, err := db.Prepare("Insert Users set account=? ,password = ? ,email = ?")
+	stmt, err := DataAcess.Db.Prepare("Insert Users set account=? ,password = ? ,email = ?")
 	checkErr(err)
 
 	stmt.Exec(u.Account, u.Password, u.Email)
 	checkErr(err)
 
-	db.Close()
+	DataAcess.Db.Close()
 }
 
 func checkErr(err error) {
