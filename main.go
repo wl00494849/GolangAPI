@@ -7,7 +7,7 @@ import (
 
 func main() {
 
-	http.HandleFunc("/CreateUser", Controller.CreateUserController)
+	http.HandleFunc("/CreateUser", Controller.CreateUser)
 	http.ListenAndServe(":8778", nil)
 
 }

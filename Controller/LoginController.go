@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func CreateUserController(w http.ResponseWriter, r *http.Request) {
+func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	fmt.Println("method:", r.Method)
