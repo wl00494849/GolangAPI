@@ -11,12 +11,12 @@ import (
 func CreateUserController(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
-
+	fmt.Println("method:", r.Method)
 	fmt.Println("path", r.URL.Path)
 	fmt.Println("scheme", r.URL.Scheme)
 
-	if r.Method == "Get" {
-		t, _ := template.ParseFiles("/View/CreateUser.gtpl")
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("View/CreateUser.gtpl")
 		log.Println(t.Execute(w, nil))
 	} else {
 		u := new(Server.Users)

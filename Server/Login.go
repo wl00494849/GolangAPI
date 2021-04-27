@@ -2,6 +2,8 @@ package Server
 
 import (
 	"database/sql"
+
+	"github.com/go-sql-driver/mysql"
 )
 
 type Users struct {
@@ -12,8 +14,16 @@ type Users struct {
 
 func (u *Users) CreateUser() {
 
-	db, err := sql.Open("mysql", "root:1qaz2wsx3edc@/projectmanage?charset=utf8")
-	checkErr(err)
+	config := mysql.Config{
+		User:                 "root",
+		Passwd:               "1qaz2wsx3edc",
+		Addr:                 "127.0.0.1:3306",
+		Net:                  "tcp",
+		DBName:               "projectmanage",
+		AllowNativePasswords: true,
+	}
+
+	db, _ := sql.Open("mysql", config.FormatDSN())
 
 	stmt, err := db.Prepare("Insert Users set account=? ,password = ? ,email = ?")
 	checkErr(err)
