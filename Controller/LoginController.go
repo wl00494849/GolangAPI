@@ -29,6 +29,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 		//轉Json
 		jsonData, _ := json.Marshal(u)
+
+		w.Write(jsonData)
 		fmt.Println("Json:", string(jsonData))
 	}
 

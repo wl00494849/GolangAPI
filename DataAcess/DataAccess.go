@@ -10,6 +10,7 @@ import (
 var Db *sql.DB
 
 func init() {
+
 	config := mysql.Config{
 		User:                 "root",
 		Passwd:               "1qaz2wsx3edc",
