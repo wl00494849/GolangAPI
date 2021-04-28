@@ -10,16 +10,16 @@ type Users struct {
 	Email    string
 }
 
-var er = new(Err)
+var er = new(ErrorHandle)
 
 func (u *Users) CreateUser() {
 
 	conn := DataAcess.Db
 
 	stmt, err := conn.Prepare("Insert Users set account=? ,password = ? ,email = ?")
-	er.checkErr(err)
+	er.CheckErr(err)
 
 	stmt.Exec(u.Account, u.Password, u.Email)
-	er.checkErr(err)
+	er.CheckErr(err)
 
 }

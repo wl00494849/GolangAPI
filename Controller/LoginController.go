@@ -4,10 +4,10 @@ import (
 	"GolangApi/Server"
 	"encoding/json"
 	"fmt"
-	"html/template"
-	"log"
 	"net/http"
 )
+
+var route = new(Server.Route)
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 
@@ -16,8 +16,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("path:", r.URL.Path)
 
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("View/CreateUser.gtpl")
-		log.Println(t.Execute(w, nil))
+		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	} else {
 
 		u := new(Server.Users)
@@ -29,10 +28,10 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 		//轉Json
 		jsonData, _ := json.Marshal(u)
-
-		w.Write(jsonData)
 		fmt.Println("Json:", string(jsonData))
+
+		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	}
 
-	fmt.Fprintf(w, "200")
+	fmt.Println("code:", "200")
 }

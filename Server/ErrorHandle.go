@@ -1,8 +1,8 @@
 package Server
 
-type Err struct{}
+type ErrorHandle struct{}
 
-func (e *Err) checkErr(err error) {
+func (e ErrorHandle) CheckErr(err error) {
 	if err != nil {
 		panic(err)
 	}
