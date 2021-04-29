@@ -18,6 +18,7 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:4200", "http://localhost:8778"},
 	})
+	fmt.Println("Cors:", "Ok")
 
 	mux := &Mux{}
 
@@ -25,18 +26,18 @@ func main() {
 	err := http.ListenAndServe(":8778", c.Handler(mux))
 	er.CheckErr(err)
 
-	http.HandleFunc("/CreateUser", Controller.CreateUser)
-	fmt.Println("Port:", "Ok")
-
 }
 
+//路由
 func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/CreateUser":
 		Controller.CreateUser(w, r)
 		break
+	case "/UsersList":
+		Controller.UsersList(w, r)
+		break
 	default:
 		http.NotFound(w, r)
 	}
-
 }

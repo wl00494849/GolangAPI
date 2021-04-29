@@ -19,7 +19,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	} else {
 
-		u := new(Server.Users)
+		u := new(Server.User)
 		u.Account = r.FormValue("Account")
 		u.Password = r.FormValue("Password")
 		u.Email = r.FormValue("Email")
@@ -34,4 +34,13 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("code:", "200")
+}
+
+func UsersList(w http.ResponseWriter, r *http.Request) {
+
+	userSlice := Server.UsersList()
+
+	jsonData, _ := json.Marshal(userSlice)
+
+	w.Write(jsonData)
 }
