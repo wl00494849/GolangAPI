@@ -19,16 +19,16 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	} else {
 
-		u := Server.User{
+		user := Server.User{
 			Account:  r.FormValue("Account"),
 			Password: r.FormValue("Password"),
 			Email:    r.FormValue("Email"),
 		}
 
-		u.CreateUser()
+		user.CreateUser()
 
 		//轉Json
-		jsonData, _ := json.Marshal(u)
+		jsonData, _ := json.Marshal(user)
 		fmt.Println("Json:", string(jsonData))
 
 	}

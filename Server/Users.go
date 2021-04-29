@@ -25,20 +25,20 @@ func (u *User) CreateUser() {
 
 }
 
-func UsersList() []Model.Users {
-	u := make([]Model.Users, 0)
+func UsersList() []Model.User {
+	userSlice := make([]Model.User, 0)
 	conn := DataAcess.Db
 
 	row, err := conn.Query("SELECT * FROM users")
 	er.CheckErr(err)
 
 	for row.Next() {
-		user := new(Model.Users)
+		user := new(Model.User)
 
 		row.Scan(&user.UserID, &user.Account, &user.Password, &user.Email)
 
-		u = append(u, *user)
+		userSlice = append(userSlice, *user)
 	}
 
-	return u
+	return userSlice
 }
