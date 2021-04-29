@@ -33,14 +33,11 @@ func UsersList() []Model.Users {
 	er.CheckErr(err)
 
 	for row.Next() {
-		var userID int
-		var account string
-		var password string
-		var email string
+		user := new(Model.Users)
 
-		row.Scan(&userID, &account, &password, &email)
+		row.Scan(&user.UserID, &user.Account, &user.Password, &user.Email)
 
-		u = append(u, Model.Users{userID, account, password, email})
+		u = append(u, *user)
 	}
 
 	return u

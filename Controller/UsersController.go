@@ -30,7 +30,6 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		jsonData, _ := json.Marshal(u)
 		fmt.Println("Json:", string(jsonData))
 
-		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	}
 
 	fmt.Println("code:", "200")
