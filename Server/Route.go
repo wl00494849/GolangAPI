@@ -6,8 +6,7 @@ import (
 	"text/template"
 )
 
-type Route struct {
-}
+type Route struct{}
 
 func (r Route) RedirectRoute(w http.ResponseWriter, url string) {
 	t, _ := template.ParseFiles(url)

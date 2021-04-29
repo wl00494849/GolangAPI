@@ -11,24 +11,32 @@ import (
 
 var er = new(Server.ErrorHandle)
 
+type Mux struct{}
+
 func main() {
 	//Cors跨域設定
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:4200", "http://localhost:8778"},
 	})
-	fmt.Println("Cors:", "Ok")
 
-	//handler實作
-	handler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-	})
-	fmt.Println("handle:", "Ok")
+	mux := &Mux{}
 
 	//監聽Port設定
+	err := http.ListenAndServe(":8778", c.Handler(mux))
+	er.CheckErr(err)
+
 	http.HandleFunc("/CreateUser", Controller.CreateUser)
 	fmt.Println("Port:", "Ok")
 
-	err := http.ListenAndServe(":8778", c.Handler(handler))
-	er.CheckErr(err)
+}
+
+func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/CreateUser":
+		Controller.CreateUser(w, r)
+		break
+	default:
+		http.NotFound(w, r)
+	}
 
 }
