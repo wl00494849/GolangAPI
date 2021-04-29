@@ -19,10 +19,11 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	} else {
 
-		u := new(Server.User)
-		u.Account = r.FormValue("Account")
-		u.Password = r.FormValue("Password")
-		u.Email = r.FormValue("Email")
+		u := Server.User{
+			Account:  r.FormValue("Account"),
+			Password: r.FormValue("Password"),
+			Email:    r.FormValue("Email"),
+		}
 
 		u.CreateUser()
 
