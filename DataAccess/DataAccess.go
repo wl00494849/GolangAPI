@@ -1,4 +1,4 @@
-package DataAcess
+package DataAccess
 
 import (
 	"database/sql"
@@ -18,6 +18,7 @@ func init() {
 		Net:                  "tcp",
 		DBName:               "projectmanage",
 		AllowNativePasswords: true,
+		ParseTime:            true,
 	}
 
 	db, _ := sql.Open("mysql", config.FormatDSN())

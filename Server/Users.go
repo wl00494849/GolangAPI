@@ -1,7 +1,7 @@
 package Server
 
 import (
-	"GolangApi/DataAcess"
+	"GolangApi/DataAccess"
 	"GolangApi/Model"
 )
 
@@ -11,11 +11,9 @@ type User struct {
 	Email    string
 }
 
-var er = new(ErrorHandle)
-
 func (u *User) CreateUser() {
 
-	conn := DataAcess.Db
+	conn := DataAccess.Db
 
 	stmt, err := conn.Prepare("Insert Users set account=? ,password = ? ,email = ?")
 	er.CheckErr(err)
@@ -27,7 +25,7 @@ func (u *User) CreateUser() {
 
 func UsersList() []Model.User {
 	userSlice := make([]Model.User, 0)
-	conn := DataAcess.Db
+	conn := DataAccess.Db
 
 	row, err := conn.Query("SELECT * FROM users")
 	er.CheckErr(err)
@@ -35,7 +33,7 @@ func UsersList() []Model.User {
 	for row.Next() {
 		user := new(Model.User)
 
-		row.Scan(&user.UserID, &user.Account, &user.Password, &user.Email)
+		ScanToStruct(row, user)
 
 		userSlice = append(userSlice, *user)
 	}
