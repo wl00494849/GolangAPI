@@ -22,6 +22,12 @@ func ScanToStruct(row *sql.Rows, dest interface{}) error {
 
 	for i := 0; i < v.Elem().NumField(); i++ {
 		propertyName := v.Elem().Field(i)
+
+		//取得註解特定字串寫法(註解內含有"db")
+		//可用於建構式函式
+		// col_name := v.Elem().Type().Field(i).Tag.Get("db")
+
+		//取得欄位名稱
 		col_name := v.Elem().Type().Field(i).Name
 		if col_name == "" {
 			if v.Elem().Field(i).CanInterface() == false {
