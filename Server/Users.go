@@ -28,8 +28,11 @@ func UsersList() []Model.User {
 	conn := DataAccess.Db
 
 	row, err := conn.Query("SELECT * FROM users")
+
 	er.CheckErr(err)
 
+	//func結束前關閉
+	defer row.Close()
 	for row.Next() {
 		user := new(Model.User)
 

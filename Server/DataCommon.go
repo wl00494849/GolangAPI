@@ -23,7 +23,7 @@ func ScanToStruct(row *sql.Rows, dest interface{}) error {
 	for i := 0; i < v.Elem().NumField(); i++ {
 		propertyName := v.Elem().Field(i)
 
-		//取得註解特定字串寫法(註解內含有"db")
+		//取得註解特定字串寫法(註解內`db`標記內的Value)
 		//可用於建構式函式
 		// col_name := v.Elem().Type().Field(i).Tag.Get("db")
 
@@ -40,8 +40,11 @@ func ScanToStruct(row *sql.Rows, dest interface{}) error {
 		addr_by_col_name[col_name] = propertyName.Addr().Interface()
 	}
 	// 把實際各成員屬性的位置, 給加到scan_dest中
+	// 尋覽col_names所有資料
 	for _, col_name := range col_names {
-		scan_dest = append(scan_dest, addr_by_col_name[col_name])
+		if addr_by_col_name[col_name] != nil {
+			scan_dest = append(scan_dest, addr_by_col_name[col_name])
+		}
 	}
 	// 執行Scan
 	return row.Scan(scan_dest...)
