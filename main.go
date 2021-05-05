@@ -21,7 +21,6 @@ func main() {
 	fmt.Println("Cors:", "Ok")
 
 	mux := &Mux{}
-
 	//監聽Port設定
 	err := http.ListenAndServe(":8778", c.Handler(mux))
 	er.CheckErr(err)
