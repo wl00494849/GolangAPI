@@ -1,4 +1,4 @@
-package Server
+package server
 
 import (
 	"database/sql"
@@ -42,9 +42,7 @@ func ScanToStruct(row *sql.Rows, dest interface{}) error {
 	// 把實際各成員屬性的位置, 給加到scan_dest中
 	// 尋覽col_names所有資料
 	for _, col_name := range col_names {
-		if addr_by_col_name[col_name] != nil {
-			scan_dest = append(scan_dest, addr_by_col_name[col_name])
-		}
+		scan_dest = append(scan_dest, addr_by_col_name[col_name])
 	}
 	// 執行Scan
 	return row.Scan(scan_dest...)

@@ -1,4 +1,4 @@
-package Model
+package model
 
 type Work struct {
 	Work_Code    string

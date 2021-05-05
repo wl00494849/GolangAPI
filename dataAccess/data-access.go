@@ -1,4 +1,4 @@
-package DataAccess
+package dataAccess
 
 import (
 	"database/sql"

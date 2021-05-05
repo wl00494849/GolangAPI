@@ -1,4 +1,4 @@
-module GolangApi
+module golang-api
 
 go 1.16
 

@@ -1,4 +1,4 @@
-package Model
+package model
 
 type Sys_Code struct {
 	SC_type   string

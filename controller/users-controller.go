@@ -1,13 +1,13 @@
-package Controller
+package controller
 
 import (
-	"GolangApi/Server"
 	"encoding/json"
 	"fmt"
+	"golang-api/server"
 	"net/http"
 )
 
-var route = new(Server.Route)
+var route = new(server.Route)
 
 func CreateUser(w http.ResponseWriter, r *http.Request) {
 
@@ -19,7 +19,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		route.RedirectRoute(w, "View/CreateUser.gtpl")
 	} else {
 
-		user := Server.User{
+		user := server.User{
 			Account:  r.FormValue("Account"),
 			Password: r.FormValue("Password"),
 			Email:    r.FormValue("Email"),
@@ -38,7 +38,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 
 func UsersList(w http.ResponseWriter, r *http.Request) {
 
-	userSlice := Server.UsersList()
+	userSlice := server.UsersList()
 
 	jsonData, _ := json.Marshal(userSlice)
 

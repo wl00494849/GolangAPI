@@ -1,15 +1,15 @@
 package main
 
 import (
-	"GolangApi/Controller"
-	"GolangApi/Server"
 	"fmt"
+	"golang-api/controller"
+	"golang-api/server"
 	"net/http"
 
 	"github.com/rs/cors"
 )
 
-var er = new(Server.ErrorHandle)
+var er = new(server.ErrorHandle)
 
 type Mux struct{}
 
@@ -32,10 +32,10 @@ func main() {
 func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/CreateUser":
-		Controller.CreateUser(w, r)
+		controller.CreateUser(w, r)
 		break
 	case "/UsersList":
-		Controller.UsersList(w, r)
+		controller.UsersList(w, r)
 		break
 	default:
 		http.NotFound(w, r)
