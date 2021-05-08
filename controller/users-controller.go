@@ -44,3 +44,10 @@ func UsersList(w http.ResponseWriter, r *http.Request) {
 
 	w.Write(jsonData)
 }
+
+func DockerTest(w http.ResponseWriter, r *http.Request) {
+
+	jsonData, _ := json.Marshal("Hellow Docker")
+
+	w.Write(jsonData)
+}

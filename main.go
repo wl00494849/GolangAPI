@@ -36,6 +36,8 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/UsersList":
 		controller.UsersList(w, r)
 		break
+	case "/DockerTest":
+		controller.DockerTest(w, r)
 	default:
 		http.NotFound(w, r)
 	}
