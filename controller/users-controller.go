@@ -49,5 +49,7 @@ func DockerTest(w http.ResponseWriter, r *http.Request) {
 
 	jsonData, _ := json.Marshal("Hellow Docker")
 
+	fmt.Println("Docker:sucess")
+
 	w.Write(jsonData)
 }

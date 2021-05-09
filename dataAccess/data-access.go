@@ -13,7 +13,7 @@ func init() {
 
 	config := mysql.Config{
 		User:                 "root",
-		Passwd:               "1qaz@WSX3edc",
+		Passwd:               "1qaz2wsx3edc",
 		Addr:                 "127.0.0.1:3306",
 		Net:                  "tcp",
 		DBName:               "projectmanage",

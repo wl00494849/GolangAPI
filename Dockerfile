@@ -1,11 +1,11 @@
-FROM golang
-WORKDIR /go/src/golang-api
-ADD . /go/src/golang-api
+FROM zhung1027/golang-api
+WORKDIR /go/src/golang-api1
+ADD . /go/src/golang-api1
 
 RUN apt-get update \
      && apt install -y git
 
-RUN cd /go/src/golang-api \
+RUN cd /go/src/golang-api1 \
     && go get github.com/go-sql-driver/mysql \
     && go get github.com/rs/cors \
     && go build 

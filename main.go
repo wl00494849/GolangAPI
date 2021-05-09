@@ -16,7 +16,10 @@ type Mux struct{}
 func main() {
 	//Cors跨域設定
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:4200"},
+		AllowedOrigins: []string{
+			"http://localhost:4200",
+			"http://localhost:58505",
+		},
 	})
 	fmt.Println("Cors:", "Ok")
 
@@ -24,7 +27,6 @@ func main() {
 	//監聽Port設定
 	err := http.ListenAndServe(":8778", c.Handler(mux))
 	er.CheckErr(err)
-
 }
 
 //路由
