@@ -3,6 +3,7 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+	"golang-api/model"
 	"golang-api/server"
 	"net/http"
 )
@@ -34,6 +35,14 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Println("code:", "200")
+
+	res := model.ResultModel{
+		Code:     200,
+		Body:     "",
+		IsSucess: true,
+	}
+
+	w.Write(res.ResponseResult())
 }
 
 func UsersList(w http.ResponseWriter, r *http.Request) {
@@ -55,13 +64,23 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	server.DeleteUser(id)
 
 	fmt.Println("sucess")
+
+	res := model.ResultModel{
+		Code:     200,
+		Body:     "",
+		IsSucess: true,
+	}
+
+	w.Write(res.ResponseResult())
 }
 
 func DockerTest(w http.ResponseWriter, r *http.Request) {
 
-	jsonData, _ := json.Marshal("Hellow Docker")
+	res := model.ResultModel{
+		Code:     200,
+		Body:     "Hellow Docker",
+		IsSucess: true,
+	}
 
-	fmt.Println("Docker:sucess")
-
-	w.Write(jsonData)
+	w.Write(res.ResponseResult())
 }
