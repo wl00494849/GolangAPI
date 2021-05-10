@@ -40,6 +40,10 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		break
 	case "/DockerTest":
 		controller.DockerTest(w, r)
+		break
+	case "/DeleteUser":
+		controller.DeleteUser(w, r)
+		break
 	default:
 		http.NotFound(w, r)
 	}

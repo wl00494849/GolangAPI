@@ -45,6 +45,18 @@ func UsersList(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonData)
 }
 
+func DeleteUser(w http.ResponseWriter, r *http.Request) {
+
+	var id int
+
+	defer r.Body.Close()
+	json.NewDecoder(r.Body).Decode(&id)
+
+	server.DeleteUser(id)
+
+	fmt.Println("sucess")
+}
+
 func DockerTest(w http.ResponseWriter, r *http.Request) {
 
 	jsonData, _ := json.Marshal("Hellow Docker")

@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"golang-api/dataAccess"
 	"golang-api/model"
 )
@@ -19,8 +20,18 @@ func (u *User) CreateUser() {
 	er.CheckErr(err)
 
 	stmt.Exec(u.Account, u.Password, u.Email)
+
+}
+
+func DeleteUser(userID int) {
+	conn := dataAccess.Db
+
+	stmt, err := conn.Prepare("Delete Users where UserID = ?")
 	er.CheckErr(err)
 
+	stmt.Exec(userID)
+
+	fmt.Println("sucess")
 }
 
 func UsersList() []model.User {
