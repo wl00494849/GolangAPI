@@ -26,7 +26,7 @@ func (u *User) CreateUser() {
 func DeleteUser(userID int) {
 	conn := dataAccess.Db
 
-	stmt, err := conn.Prepare("Delete Users where UserID = ?")
+	stmt, err := conn.Prepare("Delete from Users where UserID = ?")
 	er.CheckErr(err)
 
 	stmt.Exec(userID)
