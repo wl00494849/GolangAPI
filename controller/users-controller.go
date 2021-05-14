@@ -74,7 +74,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Write(res.ResponseResult())
 }
 
-func ChannlTest(w http.ResponseWriter, r *http.Request) {
+func ChannelTest(w http.ResponseWriter, r *http.Request) {
 
 	var str = new(model.ChannlTestModel)
 
