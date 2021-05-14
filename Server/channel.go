@@ -5,37 +5,44 @@ import (
 	"sync"
 )
 
-var channel = make(chan string)
-var channel1 = make(chan string)
-var wg = sync.WaitGroup{}
-var sli []string
+type channels struct {
+	channel  chan string
+	channel1 chan string
+	wg       sync.WaitGroup
+	sli      []string
+}
 
 func ChanTest(msg []string) []string {
-	sli = make([]string, 0)
+	c := channels{
+		channel:  make(chan string),
+		channel1: make(chan string),
+		wg:       sync.WaitGroup{},
+		sli:      make([]string, 0),
+	}
 
-	wg.Add(len(msg))
-	go chanOutPut()
-	go chanPrint()
+	c.wg.Add(len(msg))
+	go c.chanOutPut()
+	go c.chanPrint()
 
 	for _, ch := range msg {
 		fmt.Println(ch)
-		channel <- ch
+		c.channel <- ch
 	}
 
-	wg.Wait()
-	return sli
+	c.wg.Wait()
+	return c.sli
 }
 
-func chanOutPut() {
-	for ch := range channel1 {
-		sli = append(sli, "Say "+ch)
-		wg.Done()
+func (c *channels) chanOutPut() {
+	for ch := range c.channel1 {
+		c.sli = append(c.sli, "Say "+ch)
+		c.wg.Done()
 	}
 }
 
-func chanPrint() {
-	for ch := range channel {
+func (c *channels) chanPrint() {
+	for ch := range c.channel {
 		fmt.Println("Add " + ch)
-		channel1 <- ch
+		c.channel1 <- ch
 	}
 }
