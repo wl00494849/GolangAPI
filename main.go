@@ -46,7 +46,7 @@ func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		controller.DeleteUser(w, r)
 		break
 	case "/ChannlTest":
-		controller.ChannlTest(w, r)
+		controller.ChannelTest(w, r)
 		break
 	default:
 		http.NotFound(w, r)
