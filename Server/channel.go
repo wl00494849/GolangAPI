@@ -11,7 +11,7 @@ func ChanTest(msg []string) []string {
 	channl = make(chan string)
 	sli = make([]string, 0)
 
-	go chanlOutPut()
+	go chanOutPut()
 
 	for _, ch := range msg {
 		fmt.Println(ch)
@@ -21,7 +21,7 @@ func ChanTest(msg []string) []string {
 	return sli
 }
 
-func chanlOutPut() {
+func chanOutPut() {
 	for ch := range channl {
 		fmt.Printf("add %s", ch)
 		sli = append(sli, "Say "+ch)
