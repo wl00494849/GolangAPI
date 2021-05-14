@@ -32,17 +32,17 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		jsonData, _ := json.Marshal(user)
 		fmt.Println("Json:", string(jsonData))
 
+		res := model.ResultModel{
+			Code:     200,
+			Body:     "",
+			IsSucess: true,
+		}
+
+		w.Write(res.ResponseResult())
 	}
 
 	fmt.Println("code:", "200")
 
-	res := model.ResultModel{
-		Code:     200,
-		Body:     "",
-		IsSucess: true,
-	}
-
-	w.Write(res.ResponseResult())
 }
 
 func UsersList(w http.ResponseWriter, r *http.Request) {
@@ -72,6 +72,19 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Write(res.ResponseResult())
+}
+
+func ChannlTest(w http.ResponseWriter, r *http.Request) {
+
+	var str = new(model.ChannlTestModel)
+
+	defer r.Body.Close()
+	json.NewDecoder(r.Body).Decode(&str)
+
+	res := server.ChanTest(str.Str)
+	jsonData, _ := json.Marshal(res)
+
+	w.Write(jsonData)
 }
 
 func DockerTest(w http.ResponseWriter, r *http.Request) {

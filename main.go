@@ -27,10 +27,11 @@ func main() {
 	//監聽Port設定
 	err := http.ListenAndServe(":8778", c.Handler(mux))
 	er.CheckErr(err)
+
 }
 
 //路由
-func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/CreateUser":
 		controller.CreateUser(w, r)
@@ -43,6 +44,9 @@ func (m *Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		break
 	case "/DeleteUser":
 		controller.DeleteUser(w, r)
+		break
+	case "/ChannlTest":
+		controller.ChannlTest(w, r)
 		break
 	default:
 		http.NotFound(w, r)

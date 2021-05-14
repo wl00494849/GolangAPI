@@ -6,3 +6,7 @@ type User struct {
 	Password string
 	Email    string
 }
+
+type ChannlTestModel struct {
+	Str []string
+}
