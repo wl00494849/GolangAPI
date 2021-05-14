@@ -2,17 +2,18 @@ package server
 
 import (
 	"fmt"
+	"sync"
 )
 
-var channel chan string
-var channel1 chan string
+var channel = make(chan string)
+var channel1 = make(chan string)
+var wg = sync.WaitGroup{}
 var sli []string
 
 func ChanTest(msg []string) []string {
-	channel = make(chan string)
-	channel1 = make(chan string)
 	sli = make([]string, 0)
 
+	wg.Add(len(msg))
 	go chanOutPut()
 	go chanPrint()
 
@@ -21,18 +22,20 @@ func ChanTest(msg []string) []string {
 		channel <- ch
 	}
 
+	wg.Wait()
 	return sli
 }
 
 func chanOutPut() {
-	for ch := range channel {
+	for ch := range channel1 {
 		sli = append(sli, "Say "+ch)
-		channel1 <- ch
+		wg.Done()
 	}
 }
 
 func chanPrint() {
-	for ch := range channel1 {
+	for ch := range channel {
 		fmt.Println("Add " + ch)
+		channel1 <- ch
 	}
 }
