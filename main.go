@@ -22,7 +22,10 @@ func main() {
 			"http://localhost:58505",
 		},
 	})
+
 	fmt.Println("Cors:", "Ok")
+
+	http.Handle("/Socket", websocket.Handler(server.Echo))
 
 	mux := &Mux{}
 	//監聽Port設定

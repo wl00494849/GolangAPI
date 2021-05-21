@@ -7,6 +7,7 @@ import (
 )
 
 func Echo(ws *websocket.Conn) {
+
 	var err error
 
 	for {
