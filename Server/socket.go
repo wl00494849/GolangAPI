@@ -23,11 +23,14 @@ func Echo(ws *websocket.Conn) {
 	go c.send(ws)
 
 	for {
+		var reply string
 
-		if err = websocket.Message.Receive(ws, c.MsgChannl); err != nil {
+		if err = websocket.Message.Receive(ws, &reply); err != nil {
 			fmt.Println("Nothing Recevie")
 			break
 		}
+
+		c.MsgChannl <- reply
 	}
 }
 
