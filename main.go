@@ -56,7 +56,3 @@ func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
 	}
 }
-
-func socket(ws *websocket.Conn) {
-
-}
