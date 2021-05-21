@@ -97,3 +97,14 @@ func DockerTest(w http.ResponseWriter, r *http.Request) {
 
 	w.Write(res.ResponseResult())
 }
+
+func SockretPage(w http.ResponseWriter, r *http.Request) {
+
+	r.ParseForm()
+
+	fmt.Println("method:", r.Method)
+	fmt.Println("path:", r.URL.Path)
+
+	route.RedirectRoute(w, "View/Socket.gtpl")
+
+}

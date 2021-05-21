@@ -52,6 +52,8 @@ func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/ChannlTest":
 		controller.ChannelTest(w, r)
 		break
+	case "/Socket":
+		controller.SockretPage(w, r)
 	default:
 		http.NotFound(w, r)
 	}

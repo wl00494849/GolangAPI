@@ -2,27 +2,44 @@ package server
 
 import (
 	"fmt"
+	"sync"
 
 	"golang.org/x/net/websocket"
 )
 
+type channel struct {
+	MsgChannl chan string
+	wg        sync.WaitGroup
+}
+
 func Echo(ws *websocket.Conn) {
 
 	var err error
+	c := channel{
+		MsgChannl: make(chan string),
+		wg:        sync.WaitGroup{},
+	}
+
+	go c.send(ws)
 
 	for {
-		var msg string
 
-		if err = websocket.Message.Receive(ws, msg); err != nil {
+		if err = websocket.Message.Receive(ws, c.MsgChannl); err != nil {
 			fmt.Println("Nothing Recevie")
 			break
 		}
+	}
+}
 
-		reply := "OK : " + msg
-		fmt.Println("Success Message : " + msg)
+func (c *channel) send(ws *websocket.Conn) {
+	var err error
 
-		if err = websocket.Message.Send(ws, reply); err != nil {
+	for reply := range c.MsgChannl {
+		fmt.Println("Success Message : " + reply)
+		msg := "OK : " + reply
+		if err = websocket.Message.Send(ws, msg); err != nil {
 			fmt.Println("Send error")
+			err = nil
 		}
 	}
 }
