@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"golang-api/controller"
 	"golang-api/server"
 	"net/http"
@@ -14,7 +13,7 @@ var er = new(server.ErrorHandle)
 type Mux struct{}
 
 func main() {
-	//Cors跨域設定
+	// //Cors跨域設定
 	// c := cors.New(cors.Options{
 	// 	AllowedOrigins: []string{
 	// 		"http://localhost:4200",
@@ -22,18 +21,16 @@ func main() {
 	// 	},
 	// })
 
-	fmt.Println("Cors:", "Ok")
-	http.HandleFunc("/SocketPage", controller.SockretPage)
-	http.Handle("/Socket", websocket.Handler(server.Echo))
-	http.ListenAndServe(":8778", nil)
+	// fmt.Println("Cors:", "Ok")
 
 	// mux := &Mux{}
 	// //監聽Port設定
 	// err := http.ListenAndServe(":8778", c.Handler(mux))
 	// er.CheckErr(err)
 
-	// http.Handle("/", websocket.Server{})
-	// http.ListenAndServe(":8877", nil)
+	http.HandleFunc("/SocketPage", controller.SockretPage)
+	http.Handle("/Socket", websocket.Handler(server.Echo))
+	http.ListenAndServe(":8877", nil)
 
 }
 
@@ -55,6 +52,8 @@ func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	case "/ChannlTest":
 		controller.ChannelTest(w, r)
 		break
+	case "/SocketPage":
+		controller.SockretPage(w, r)
 	default:
 		http.NotFound(w, r)
 	}

@@ -3,7 +3,7 @@
 <body>
     <script type="text/javascript">
         var sock = null;
-        var wsuri = "ws://127.0.0.1:8778/Socket";
+        var wsuri = "ws://127.0.0.1:8877/Socket";
 
         window.onload = function() {
 
