@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/rs/cors"
+	"golang.org/x/net/websocket"
 )
 
 var er = new(server.ErrorHandle)
@@ -51,4 +52,8 @@ func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	default:
 		http.NotFound(w, r)
 	}
+}
+
+func socket(ws *websocket.Conn) {
+
 }
