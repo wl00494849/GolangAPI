@@ -12,9 +12,9 @@ var Db *sql.DB
 func init() {
 
 	config := mysql.Config{
-		User:                 "root",
-		Passwd:               "1qaz2wsx3edc",
-		Addr:                 "127.0.0.1:3306",
+		User:                 "testuser",
+		Passwd:               "1qaz@WSX3edc",
+		Addr:                 "25.54.149.235:3306",
 		Net:                  "tcp",
 		DBName:               "projectmanage",
 		AllowNativePasswords: true,
