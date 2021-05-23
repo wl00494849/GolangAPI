@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"golang-api/controller"
 	"golang-api/server"
 	"net/http"
 
-	"golang.org/x/net/websocket"
+	"github.com/rs/cors"
 )
 
 var er = new(server.ErrorHandle)
@@ -13,24 +14,24 @@ var er = new(server.ErrorHandle)
 type Mux struct{}
 
 func main() {
-	// //Cors跨域設定
-	// c := cors.New(cors.Options{
-	// 	AllowedOrigins: []string{
-	// 		"http://localhost:4200",
-	// 		"http://localhost:58505",
-	// 	},
-	// })
+	//Cors跨域設定
+	c := cors.New(cors.Options{
+		AllowedOrigins: []string{
+			"http://localhost:4200",
+			"http://localhost:58505",
+		},
+	})
 
-	// fmt.Println("Cors:", "Ok")
+	fmt.Println("Cors:", "Ok")
 
-	// mux := &Mux{}
-	// //監聽Port設定
-	// err := http.ListenAndServe(":8778", c.Handler(mux))
-	// er.CheckErr(err)
+	mux := &Mux{}
+	//監聽Port設定
+	err := http.ListenAndServe(":8778", c.Handler(mux))
+	er.CheckErr(err)
 
-	http.HandleFunc("/SocketPage", controller.SockretPage)
-	http.Handle("/Socket", websocket.Handler(server.Echo))
-	http.ListenAndServe(":8877", nil)
+	// http.HandleFunc("/SocketPage", controller.SockretPage)
+	// http.Handle("/Socket", websocket.Handler(server.Echo))
+	// http.ListenAndServe(":8877", nil)
 
 }
 
