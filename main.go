@@ -37,6 +37,8 @@ func main() {
 
 //路由
 func (m Mux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("Port:", r.Host)
+	fmt.Println("Path:", r.URL.Path)
 	switch r.URL.Path {
 	case "/CreateUser":
 		controller.CreateUser(w, r)

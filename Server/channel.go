@@ -15,8 +15,8 @@ type channels struct {
 func ChanTest(msg []string) []string {
 
 	c := channels{
-		channel:  make(chan string),
-		channel1: make(chan string),
+		channel:  make(chan string, 2),
+		channel1: make(chan string, 2),
 		wg:       sync.WaitGroup{},
 		sli:      make([]string, 0),
 	}

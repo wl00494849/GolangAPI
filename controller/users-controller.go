@@ -33,7 +33,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Json:", string(jsonData))
 
 		res := model.ResultModel{
-			Code:     200,
+			Code:     http.StatusOK,
 			Body:     "",
 			IsSucess: true,
 		}
@@ -66,7 +66,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("sucess")
 
 	res := model.ResultModel{
-		Code:     200,
+		Code:     http.StatusOK,
 		Body:     "",
 		IsSucess: true,
 	}
@@ -90,7 +90,7 @@ func ChannelTest(w http.ResponseWriter, r *http.Request) {
 func DockerTest(w http.ResponseWriter, r *http.Request) {
 
 	res := model.ResultModel{
-		Code:     200,
+		Code:     http.StatusOK,
 		Body:     "Hellow Docker",
 		IsSucess: true,
 	}
