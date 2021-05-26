@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"golang-api/model"
+	"golang-api/model/response"
 	"golang-api/server"
 	"net/http"
 )
@@ -33,7 +34,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Json:", string(jsonData))
 
 		res := model.ResultModel{
-			Code:     http.StatusOK,
+			Code:     response.Success,
 			Body:     "",
 			IsSucess: true,
 		}
@@ -66,7 +67,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("sucess")
 
 	res := model.ResultModel{
-		Code:     http.StatusOK,
+		Code:     response.Success,
 		Body:     "",
 		IsSucess: true,
 	}
@@ -90,7 +91,7 @@ func ChannelTest(w http.ResponseWriter, r *http.Request) {
 func DockerTest(w http.ResponseWriter, r *http.Request) {
 
 	res := model.ResultModel{
-		Code:     http.StatusOK,
+		Code:     response.Success,
 		Body:     "Hellow Docker",
 		IsSucess: true,
 	}
